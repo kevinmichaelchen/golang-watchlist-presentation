@@ -1,7 +1,7 @@
 # golang-watchlist-presentation
 To run:
 ```bash
-brew install go --cross-compile-common
+brew install go
 go install golang.org/x/tools/cmd/present
 present
 ```
