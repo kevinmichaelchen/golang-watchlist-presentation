@@ -1,0 +1,91 @@
+Intro to Golang
+
+Kevin Chen
+TeslaGov
+kevin@teslagovernment.com
+
+* Goals
+
+- Why Go?
+- Language basics
+- Compare and contrast Go and Java
+
+* Go "Pros" (performance)
+
+- Lightweight (15mb vs 128mb), fast, scalable.
+- Fast to build, fast to test (feels sub-second vs 15 second startup time). 
+
+.link https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/go.html Go vs Java benchmark
+
+* Go "Pros" (devops)
+
+- Generates a single binary.
+- No more JARs, classpaths, JVM.
+- Easy to deploy (with or without Docker).
+  go build -o ./bin/clarakm-watchlist .
+- Easy library publishing (pull deps right from Github, no more Bintray learning curve)
+- `$GOPATH` lets you live-edit libraries before you commit them
+- Automatic formatting
+  go fmt .
+
+* Go "Pros" (frameworks)
+
+- Fewer dependencies
+- Standard library is enough to build a REST API.
+- No dealing with a web framework ("no accidentally exposed REST endpoints")
+- No ORM, no wrestling with Hibernate bugs ("null fields won't return child associations")
+- Adequate ecosystem of libraries (official AWS SDK, jwt library, etc)
+- Testing is dead simple. No test-utils necessary.
+
+* Go "Pros" (language)
+
+- Tuples. Nice error handling (no more exceptions).
+- No function overloading (leads to less abstraction).
+- Package-oriented rather than class-oriented (leads to fewer files).
+
+* Lines of Code
+
+Ran `tokei` on our projects
+
+- watchlist 1k of go
+- page 6.5k of java
+- ups 4.7k of java
+- rfi 2.2k of java
+- zendesk 908 of java
+
+* What am I missing?
+
+Cons:
+
+- No resource annotations
+- No scheduled annotations
+- No ORM (large queries for nested resources, manual TX management)
+- No DB migrations
+- Fewer layers (I've combined controller, security, and service layers)
+
+Libraries to the rescue:
+
+.link https://github.com/go-ozzo/ozzo-validation resource validation
+.link https://github.com/jinzhu/gorm ORM
+.link https://github.com/mattes/migrate migrate - DB migrations
+.link https://github.com/pressly/goose migrate - goose
+
+* What am I missing?
+
+Lack of libraries and annotations makes code 
+
+feel less declarative...
+
+a bit more tedious to write...
+
+* Hello World
+
+.code hello-world.txt
+
+* "Objects"
+
+.code objects.go
+
+* Server example
+
+.code server.txt
