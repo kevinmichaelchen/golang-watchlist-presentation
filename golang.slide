@@ -7,13 +7,17 @@ kevin@teslagovernment.com
 * Goals
 
 - Why Go?
-- Language basics
 - Compare and contrast Go and Java
+- Language basics
 
 * Go "Pros" (performance)
 
-- Lightweight (15mb vs 128mb), fast, scalable.
-- Fast to build, fast to test (feels sub-second vs 15 second startup time). 
+- Low memory footprint (2.875MiB at rest, as opposed to -Xms128m -Xmx128m)
+  docker-compose up -d && docker stats clarakm-watchlist-api
+- Docker image is 22 MB
+- Fast to build
+- Fast to test
+- Feels sub-second vs 15 second startup time).
 
 .link https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/go.html Go vs Java benchmark
 .link https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/go-node.html Go vs NodeJS
@@ -26,23 +30,27 @@ kevin@teslagovernment.com
 - No Bintray learning curve (accounts, API keys, clicking "Publish")
 - Versioning is as simple as tagging
 - `$GOPATH` lets you live-edit libraries before you commit them
-- Docs are managed for you
-  https://godoc.org/github.com/TeslaGov/clarakm-aws-events-go
+
+* Go "Pros" (code quality)
+
+- Docs are managed and hosted for you
+.link https://godoc.org/github.com/TeslaGov/clarakm-aws-events-go godoc
 - Go report card
-  https://goreportcard.com/report/github.com/TeslaGov/clarakm-aws-events-go
+.link https://goreportcard.com/report/github.com/TeslaGov/clarakm-aws-events-go report card
+- Automatic formatting ("spaces vs tabs" settled once and for all)
+  go fmt .
 
 * Go "Pros" (devops)
 
 - Generates a single binary.
 - No more JARs, classpaths, JVM.
+- No JVM tuning (e.g., Xms, Xmx)
 - Easy to deploy (with or without Docker).
-  go build -o ./bin/clarakm-watchlist .
-- Automatic formatting
-  go fmt .
+  go build -o ./bin/clarakm-watchlist . && ./bin/clarakm-watchlist
 
-* Go "Pros" (frameworks)
+* Go "Pros" (minimal dependencies)
 
-- Fewer dependencies
+- Frameworks are optional, not necessary
 - Standard library is enough to build a REST API.
 - No dealing with a web framework ("no accidentally exposed REST endpoints")
 - No ORM, no wrestling with Hibernate bugs ("null fields won't return child associations")
@@ -51,6 +59,11 @@ kevin@teslagovernment.com
 
 * Go "Pros" (language)
 
+- Not exotic. Straightforward. Usually only one way to do things.
+- Not magical. Nothing like repository.findOne().
+- Imperative. No declarative annotations.
+- Somewhat functional. Functions are first-class. (functions are like other variables).
+- Interfaces. Composition over inheritance.
 - Tuples. Nice error handling (no more exceptions).
 - No function overloading (leads to less abstraction).
 - Package-oriented rather than class-oriented (leads to fewer files).
@@ -59,15 +72,17 @@ kevin@teslagovernment.com
 
 Ran `tokei` on our projects
 
-- watchlist 2.5k for 17 Go files
+- pix 86.4k LOC for 1136 Java files
+- rampart 12k LOC for 200 Java files
 - page 8.5k LOC for 115 Java files
 - ups 7k LOC for 109 Java files
 - rfi 2.2k LOC for 36 Java files
 - zendesk 908 LOC for 30 Java files
+- watchlist 2.5k for 17 Go files
 
-* Cons
+* What's missing?
 
-In general, my Go code is less declarative / more imperative.
+Go code is less declarative / less magical / more imperative.
 
 - No declarative annotations for resource validation or scheduled tasks
 - No ORM (large queries for nested resources, manual TX management)

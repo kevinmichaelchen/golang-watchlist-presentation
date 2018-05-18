@@ -1,8 +1,13 @@
 # golang-watchlist-presentation
 To run:
 ```bash
+# install go
 brew install go
+
+# install present
 go install golang.org/x/tools/cmd/present
+
+# run the slideshow
 present
 ```
 
