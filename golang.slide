@@ -59,11 +59,11 @@ kevin@teslagovernment.com
 
 Ran `tokei` on our projects
 
-- watchlist 2.5k of go
-- page 6.5k of java
-- ups 4.7k of java
-- rfi 2.2k of java
-- zendesk 908 of java
+- watchlist 2.5k for 17 Go files
+- page 8.5k LOC for 115 Java files
+- ups 7k LOC for 109 Java files
+- rfi 2.2k LOC for 36 Java files
+- zendesk 908 LOC for 30 Java files
 
 * Cons
 
