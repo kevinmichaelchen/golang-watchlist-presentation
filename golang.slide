@@ -16,6 +16,20 @@ kevin@teslagovernment.com
 - Fast to build, fast to test (feels sub-second vs 15 second startup time). 
 
 .link https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/go.html Go vs Java benchmark
+.link https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/go-node.html Go vs NodeJS
+.link https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/go-python3.html Go vs Python
+
+* Go "Pros" (libraries)
+
+- Pull deps right from GitHub.
+  go get -u -v ./...
+- No Bintray learning curve (accounts, API keys, clicking "Publish")
+- Versioning is as simple as tagging
+- `$GOPATH` lets you live-edit libraries before you commit them
+- Docs are managed for you
+  https://godoc.org/github.com/TeslaGov/clarakm-aws-events-go
+- Go report card
+  https://goreportcard.com/report/github.com/TeslaGov/clarakm-aws-events-go
 
 * Go "Pros" (devops)
 
@@ -23,8 +37,6 @@ kevin@teslagovernment.com
 - No more JARs, classpaths, JVM.
 - Easy to deploy (with or without Docker).
   go build -o ./bin/clarakm-watchlist .
-- Easy library publishing (pull deps right from Github, no more Bintray learning curve)
-- `$GOPATH` lets you live-edit libraries before you commit them
 - Automatic formatting
   go fmt .
 
@@ -34,8 +46,8 @@ kevin@teslagovernment.com
 - Standard library is enough to build a REST API.
 - No dealing with a web framework ("no accidentally exposed REST endpoints")
 - No ORM, no wrestling with Hibernate bugs ("null fields won't return child associations")
-- Adequate ecosystem of libraries (official AWS SDK, jwt library, etc)
-- Testing is dead simple. No test-utils necessary.
+- Adequate ecosystem of libraries (official AWS SDK, JWT library, etc)
+- Testing is fast and simple. No test-utils necessary.
 
 * Go "Pros" (language)
 
@@ -47,18 +59,18 @@ kevin@teslagovernment.com
 
 Ran `tokei` on our projects
 
-- watchlist 1k of go
+- watchlist 2.5k of go
 - page 6.5k of java
 - ups 4.7k of java
 - rfi 2.2k of java
 - zendesk 908 of java
 
-* What am I missing?
+* Cons
 
-Cons:
+In general, my Go code is less declarative / more imperative.
 
-- No resource annotations
-- No scheduled annotations
+- Library versioning strategy (vgo)
+- No declarative annotations for resource validation or scheduled tasks
 - No ORM (large queries for nested resources, manual TX management)
 - No DB migrations
 - Fewer layers (I've combined controller, security, and service layers)
@@ -69,14 +81,6 @@ Libraries to the rescue:
 .link https://github.com/jinzhu/gorm ORM
 .link https://github.com/mattes/migrate migrate - DB migrations
 .link https://github.com/pressly/goose migrate - goose
-
-* What am I missing?
-
-Lack of libraries and annotations makes code 
-
-feel less declarative...
-
-a bit more tedious to write...
 
 * Hello World
 
