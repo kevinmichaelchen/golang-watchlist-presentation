@@ -69,25 +69,27 @@ Ran `tokei` on our projects
 
 In general, my Go code is less declarative / more imperative.
 
-- Library versioning strategy (vgo)
 - No declarative annotations for resource validation or scheduled tasks
 - No ORM (large queries for nested resources, manual TX management)
 - No DB migrations
 - Fewer layers (I've combined controller, security, and service layers)
+- Library versioning strategy (vgo)
 
 Libraries to the rescue:
 
 .link https://github.com/go-ozzo/ozzo-validation resource validation
 .link https://github.com/jinzhu/gorm ORM
 .link https://github.com/mattes/migrate migrate - DB migrations
-.link https://github.com/pressly/goose migrate - goose
+.link https://github.com/pressly/goose goose - DB migrations
 
 * Hello World
 
+.link https://play.golang.org/p/BwvOWBtAY53 functions, fmt.Printf
 .code hello-world.txt
 
 * "Objects"
 
+.link https://play.golang.org/p/to1jaJMWG-W doing "objects" with structs and receiver methods
 .code objects.go
 
 * Server example
