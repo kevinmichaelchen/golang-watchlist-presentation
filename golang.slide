@@ -60,13 +60,18 @@ kevin@teslagovernment.com
 * Go "Pros" (language)
 
 - Not exotic. Straightforward. Usually only one way to do things.
-- Not magical. Nothing like repository.findOne().
+- Not magical. Nothing like repository.findOneByIdAndDeletedDateTimeIsNull().
 - Imperative. No declarative annotations.
 - Somewhat functional. Functions are first-class. (functions are like other variables).
 - Interfaces. Composition over inheritance.
 - Tuples. Nice error handling (no more exceptions).
 - No function overloading (leads to less abstraction).
 - Package-oriented rather than class-oriented (leads to fewer files).
+
+.link https://yourbasic.org/golang/go-vs-java/ Go vs Java, language differences
+.link https://yourbasic.org/golang/generics/ No generics - what to do instead
+.link http://goinbigdata.com/golang-pass-by-pointer-vs-pass-by-value/ pass by pointer vs pass by value
+.link https://arhipov.net/golang/2016/03/12/shallow-copying-interface-values-in-go.html creating pointer clones
 
 * Lines of Code
 
@@ -78,7 +83,7 @@ Ran `tokei` on our projects
 - ups 7k LOC for 109 Java files
 - rfi 2.2k LOC for 36 Java files
 - zendesk 908 LOC for 30 Java files
-- watchlist 2.5k for 17 Go files
+- watchlist 2.6k for 17 Go files
 
 * What's missing?
 
