@@ -5,7 +5,7 @@ To run:
 brew install go
 
 # install present
-go install golang.org/x/tools/cmd/present
+go get -v -u golang.org/x/tools/cmd/present
 
 # run the slideshow
 present

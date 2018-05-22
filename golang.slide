@@ -69,6 +69,8 @@ kevin@teslagovernment.com
 - No function overloading (leads to less abstraction).
 - Package-oriented rather than class-oriented (leads to fewer files).
 
+* Go "Pros" (language links)
+
 .link https://yourbasic.org/golang/go-vs-java/ Go vs Java, language differences
 .link https://yourbasic.org/golang/generics/ No generics - what to do instead
 .link http://goinbigdata.com/golang-pass-by-pointer-vs-pass-by-value/ pass by pointer vs pass by value
@@ -93,6 +95,9 @@ Ran `tokei` on our projects
 - Quick to develop.
 - Fosters agility.
 
+.link https://github.com/TeslaGov/clarakm-zendesk clarakm-zendesk
+.link https://github.com/TeslaGov/clarakm-zendesk-go clarakm-zendesk-go
+
 * What's missing?
 
 Go code is less declarative / less magical / more imperative.
@@ -112,14 +117,33 @@ Libraries to the rescue:
 
 * Hello World
 
-.link https://play.golang.org/p/BwvOWBtAY53 functions, fmt.Printf
+.link https://play.golang.org/p/BwvOWBtAY53 Go Playground -- functions, fmt.Printf
 .code hello-world.txt
 
 * "Objects"
 
-.link https://play.golang.org/p/to1jaJMWG-W doing "objects" with structs and receiver methods
+.link https://play.golang.org/p/to1jaJMWG-W Go Playground -- doing "objects" with structs and receiver methods
 .code objects.go
 
+* Receiver arguments
+
+- Receiver arguments are more inflexible
+  func (d *duck) quack() {}
+- Better to use function arguments (more flexible, better for testing)
+  func quack(d *duck) {}
+- Taking in an interface is even better
+  type quacker interface {
+      quack()
+  }
+
+  type duck struct{}
+  var func (d *duck) quack() {}
+
+  func foo(d quacker) {
+      d.quack()
+  }
+
+.link https://grisha.org/blog/2016/09/22/golang-receiver-vs-function/ source
 * Server example
 
 .code server.txt
