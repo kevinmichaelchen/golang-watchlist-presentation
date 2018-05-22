@@ -15,7 +15,7 @@ kevin@teslagovernment.com
 - Low memory footprint (2.875MiB at rest, as opposed to -Xms128m -Xmx128m)
   docker-compose up -d && docker stats clarakm-watchlist-api
 - Docker image is 22 MB
-- Blazingly fast to build / test / run
+- Fast to build / test / run
 - Feels sub-second vs 15 second startup time).
 
 .link https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/go.html Go vs Java benchmark
@@ -44,7 +44,7 @@ kevin@teslagovernment.com
 * Go "Pros" (devops)
 
 - Generates a single binary.
-- No more JARs, classpaths, JVM.
+- No JARs, classpaths, JVM.
 - No JVM tuning (e.g., Xms, Xmx)
 - Easy to deploy (with or without Docker).
   go build -o ./bin/clarakm-watchlist . && ./bin/clarakm-watchlist
@@ -56,6 +56,7 @@ kevin@teslagovernment.com
 - No dealing with a web framework ("no accidentally exposed REST endpoints")
 - No ORM, no wrestling with Hibernate bugs ("null fields won't return child associations")
 - Adequate ecosystem of libraries (official AWS SDK, JWT library, etc)
+- (had one issue with SQS subscriptions, but community is abuzz)
 - Testing is fast and simple. No test-utils necessary.
 
 * Go "Pros" (language)
@@ -102,18 +103,70 @@ Ran `tokei` on our projects
 
 Go code is less declarative / less magical / more imperative.
 
-- No declarative annotations for resource validation or scheduled tasks
+- No declarative annotations for scheduled tasks
 - No ORM (large queries for nested resources, manual TX management)
 - No DB migrations
 - Fewer layers (I've combined controller, security, and service layers)
 - Library versioning strategy (vgo)
 
-Libraries to the rescue:
 
-.link https://github.com/go-ozzo/ozzo-validation resource validation
-.link https://github.com/jinzhu/gorm ORM
-.link https://github.com/mattes/migrate migrate - DB migrations
+* Scheduled tasks
+- Create a "worker" and a goroutine
+  type Worker struct {
+  	DB *sql.DB
+  }
+
+  func (w *Worker) Work() {
+  	log.Println("working")
+  }
+
+  w := Worker{DB: db}
+  go w.Work()
+.link http://marcio.io/2015/07/handling-1-million-requests-per-minute-with-golang/ Implement a super scalable worker pool
+.link https://brandur.org/go-worker-pool The Case for a Go Worker Pool
+.link https://golangbot.com/buffered-channels-worker-pools/ Buffered channels and worker pools
+
+* ORM
+.link https://github.com/jinzhu/gorm gORM
+.link http://gorm.io/docs/ gorm example
+
+- gorm has auto-migrations...
+- But raw SQL feels more clear
+- Even though you can, at times, end up with some massive queries with lots of JOINS
+.link https://github.com/TeslaGov/clarakm-watchlist/blob/master/models/page_subscription.go#L74 massive query
+
+* DB migrations
+.link https://github.com/golang-migrate/migrate migrate - DB migrations
 .link https://github.com/pressly/goose goose - DB migrations
+
+- migrate supports reading migration files from a Github repo...
+- that could work nicely with our centralized seeding repo (claramk-seed)
+
+* Resource Validation
+.link https://github.com/go-ozzo/ozzo-validation using ozzo-validation
+
+.link https://github.com/TeslaGov/clarakm-zendesk-go/blob/master/models/account_request.go#L24 ozzo-validation resource validation
+  func (r *AccountRequest) Validate() error {
+  	return validation.ValidateStruct(r,
+  		validation.Field(&r.FirstName, validation.Required, validation.Length(1, 255)),
+  		validation.Field(&r.LastName, validation.Required, validation.Length(1, 255)),
+  	)
+  }
+.link https://github.com/TeslaGov/clarakm-zendesk-go/blob/master/models/account_request_test.go Testing resource validation
+  func TestAccountRequest_Validate(t *testing.T) {
+  	Convey("Given an account request", t, func() {
+  		Convey("Not having a firstName should not pass validation", func() {
+  			r := AccountRequest{
+  				LastName: "Chen",
+  			}
+  			So(r.Validate(), ShouldNotBeNil)
+  })
+
+* Versioning
+- Versioning happens through Git tags
+- No official tool
+  glide -> dep -> vgo
+- Similar to how Java world has Maven, Ivy, Gradle, SBT, etc.
 
 * Hello World
 
