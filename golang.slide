@@ -83,7 +83,7 @@ Ran `tokei` on our projects
 
 - pix 86.4k LOC for 1136 Java files
 - rampart 12k LOC for 200 Java files
-- page 8.5k LOC for 115 Java files
+- page 5k LOC for 104 Java files (1.3k for 11 test files)
 - ups 7k LOC for 109 Java files
 - rfi 2.2k LOC for 36 Java files
 - watchlist 1.5k for 14 Go files
