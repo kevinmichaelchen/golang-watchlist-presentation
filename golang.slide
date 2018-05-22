@@ -25,6 +25,8 @@ kevin@teslagovernment.com
 
 * Go "Pros" (libraries)
 
+- The language facilitates easy library development.
+.link https://github.com/TeslaGov?language=go TeslaGov Golang repositories
 - Pull deps right from GitHub.
   go get -u -v ./...
 - No Bintray learning curve (accounts, API keys, clicking "Publish")
