@@ -85,8 +85,8 @@ Ran `tokei` on our projects
 - rampart 12k LOC for 200 Java files
 - page 8.5k LOC for 115 Java files
 - ups 7k LOC for 109 Java files
-- watchlist 2.6k for 17 Go files
 - rfi 2.2k LOC for 36 Java files
+- watchlist 1.5k for 14 Go files
 - zendesk 908 LOC for 30 Java files
 - zendesk-go 277 LOC for 6 Go files
 
