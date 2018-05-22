@@ -1,14 +1,24 @@
 # golang-watchlist-presentation
-To run:
+
+## Running the slideshow
+Make sure you have Go installed (see below).
+
+If you don't have `present` on your `$PATH`, run
+```bash
+make install-present
+```
+
+Then run
+```bash
+make
+```
+
+## Install Golang
 ```bash
 # install go
 brew install go
-
-# install present
-go get -v -u golang.org/x/tools/cmd/present
-
-# run the slideshow
-present
+export GOPATH=$HOME/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 ```
-
-Then visit [http://127.0.0.1:3999](http://127.0.0.1:3999)
