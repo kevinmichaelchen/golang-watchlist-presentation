@@ -133,7 +133,10 @@ Go code is less declarative / less magical / more imperative.
 - gorm has auto-migrations...
 - But raw SQL feels more clear
 - Even though you can, at times, end up with some massive queries with lots of JOINS
-.link https://github.com/TeslaGov/clarakm-watchlist/blob/master/models/page_subscription.go#L74 massive query
+.link https://github.com/TeslaGov/clarakm-watchlist/blob/master/models/page_subscription.go#L74 page_subscription.go - example queries
+- you have to fetch nested associations manually
+- this leads to boilerplate JOINs and boilerplate row scanning
+- e.g., page_subscription.go queries scans ~25 columns w/ 3 JOINs
 
 * DB migrations
 .link https://github.com/golang-migrate/migrate migrate - DB migrations
@@ -197,6 +200,7 @@ Go code is less declarative / less magical / more imperative.
   }
 
 .link https://grisha.org/blog/2016/09/22/golang-receiver-vs-function/ source
+
 * Server example
 
 .code server.txt
