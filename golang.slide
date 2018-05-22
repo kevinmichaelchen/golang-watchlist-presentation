@@ -15,8 +15,7 @@ kevin@teslagovernment.com
 - Low memory footprint (2.875MiB at rest, as opposed to -Xms128m -Xmx128m)
   docker-compose up -d && docker stats clarakm-watchlist-api
 - Docker image is 22 MB
-- Fast to build
-- Fast to test
+- Blazingly fast to build / test / run
 - Feels sub-second vs 15 second startup time).
 
 .link https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/go.html Go vs Java benchmark
@@ -87,6 +86,12 @@ Ran `tokei` on our projects
 - rfi 2.2k LOC for 36 Java files
 - zendesk 908 LOC for 30 Java files
 - zendesk-go 277 LOC for 6 Go files
+
+* zendesk-go
+
+- Easy to read / maintain.
+- Quick to develop.
+- Fosters agility.
 
 * What's missing?
 
