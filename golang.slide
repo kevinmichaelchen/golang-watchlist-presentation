@@ -90,10 +90,10 @@ Ran `tokei` on our projects
 - zendesk 908 LOC for 30 Java files
 - zendesk-go 277 LOC for 6 Go files
 
-* zendesk-go
+* Case Study: Fewer Files, Fewer LOC
 
 - Easy to read / maintain.
-- Quick to develop.
+- Quick to develop (not complex enough to warrant a bootstrapper, e.g., clarakm-skeleton)
 - Fosters agility.
 
 .link https://github.com/TeslaGov/clarakm-zendesk clarakm-zendesk
