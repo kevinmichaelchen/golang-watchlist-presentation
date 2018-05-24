@@ -7,8 +7,8 @@ kevin@teslagovernment.com
 * Goals
 
 - Why Go?
-- Compare and contrast Go and Java
 - Language basics
+- Demo
 
 * Go "Pros" (performance)
 
@@ -24,7 +24,7 @@ kevin@teslagovernment.com
 
 * Go "Pros" (libraries)
 
-- The language facilitates easy library development.
+- Writing libraries is simple.
 .link https://github.com/TeslaGov?language=go TeslaGov Golang repositories
 - Pull deps right from GitHub.
   go get -u -v ./...
@@ -38,8 +38,11 @@ kevin@teslagovernment.com
 .link https://godoc.org/github.com/TeslaGov/clarakm-aws-events-go godoc
 - Go report card
 .link https://goreportcard.com/report/github.com/TeslaGov/clarakm-aws-events-go report card
-- Automatic formatting ("spaces vs tabs" settled once and for all)
+- Automatic formatting
   go fmt .
+- Holy wars settled once and for all
+  tabs vs spaces
+  Allman vs K&R
 
 * Go "Pros" (devops)
 
@@ -48,11 +51,13 @@ kevin@teslagovernment.com
 - No JVM tuning (e.g., Xms, Xmx)
 - Easy to deploy (with or without Docker).
   go build -o ./bin/clarakm-watchlist . && ./bin/clarakm-watchlist
+- Platform independent
+  env GOOS=linux GOARCH=386 go build -o ./bin/clarakm-watchlist-linux -v .
 
 * Go "Pros" (minimal dependencies)
 
 - Frameworks are optional, not necessary
-- Standard library is enough to build a REST API.
+- Standard library is almost enough to build a REST API
 - No dealing with a web framework ("no accidentally exposed REST endpoints")
 - No ORM, no wrestling with Hibernate bugs ("null fields won't return child associations")
 - Adequate ecosystem of libraries (official AWS SDK, JWT library, etc)
@@ -93,7 +98,10 @@ Ran `tokei` on our projects
 * Case Study: Fewer Files, Fewer LOC
 
 - Easy to read / maintain.
-- Quick to develop (not complex enough to warrant a bootstrapper, e.g., clarakm-skeleton)
+- Quick to develop.
+  zendesk-go is only 6 files.
+- Easy to get started.
+  Not complex enough to warrant a bootstrapper, e.g., clarakm-skeleton.
 - Fosters agility.
 
 .link https://github.com/TeslaGov/clarakm-zendesk clarakm-zendesk
@@ -105,9 +113,13 @@ Go code is less declarative / less magical / more imperative.
 
 - No declarative annotations for scheduled tasks
 - No ORM (large queries for nested resources, manual TX management)
+  Arguably not a problem for simple services
 - No DB migrations
+  I intend on finding a tool for this...
 - Fewer layers (I've combined controller, security, and service layers)
+  Simplicity is elegant? Less is more?
 - Library versioning strategy (vgo)
+  I intend on finding a tool for this...
 
 
 * Scheduled tasks
@@ -174,12 +186,16 @@ Go code is less declarative / less magical / more imperative.
 * Hello World
 
 .link https://play.golang.org/p/BwvOWBtAY53 Go Playground -- functions, fmt.Printf
-.code hello-world.txt
+.code code/hello-world.txt
 
 * "Objects"
 
 .link https://play.golang.org/p/to1jaJMWG-W Go Playground -- doing "objects" with structs and receiver methods
-.code objects.go
+.code code/objects.go
+
+* "Interfaces"
+- Go has no generics
+.code code/interfaces.go
 
 * Receiver arguments
 
@@ -203,4 +219,4 @@ Go code is less declarative / less magical / more imperative.
 
 * Server example
 
-.code server.txt
+.code code/server.txt
