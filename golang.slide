@@ -121,6 +121,12 @@ Go code is less declarative / less magical / more imperative.
 - Library versioning strategy (vgo)
   I intend on finding a tool for this...
 
+* Cons
+- No generics.
+  interface is your friend.
+- Pointers can be scary if you've never seen them.
+  No pointer arithmetic, so not as bad as C.
+
 
 * Scheduled tasks
 - Create a "worker" and a goroutine
@@ -193,9 +199,30 @@ Go code is less declarative / less magical / more imperative.
 .link https://play.golang.org/p/to1jaJMWG-W Go Playground -- doing "objects" with structs and receiver methods
 .code code/objects.go
 
-* "Interfaces"
-- Go has no generics
-.code code/interfaces.go
+* Pointers (reference and dereference operator)
+- making a pointer
+  x := 54
+  a := &x // a is a pointer to x
+- getting the value the pointer points to
+  var y int = *a
+
+* Pointers, not so bad
+
+- Suppose you have this code
+  type A struct{}
+  func (a  A) X() {
+      fmt.Println("X")
+  }
+  func (a *A) Y() {
+      fmt.Println("Y")
+  }
+- Selectors automatically dereference pointers.
+  a := &A{}
+  a.X() // same like == (*a).X()
+  a.Y()
+
+.link https://play.golang.org/p/BLCLOttNq0a Playground Example
+.link https://stackoverflow.com/questions/20849751/rule-for-go-pointers-references-dereferencing source
 
 * Receiver arguments
 
